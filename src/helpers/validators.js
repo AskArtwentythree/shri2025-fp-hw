@@ -1,4 +1,4 @@
-import { allPass, pipe, values, filter, length, all } from "ramda";
+import { pipe, values, filter, length, all, any } from "ramda";
 
 /**
  * @file Домашка по FP ч. 1
@@ -30,9 +30,7 @@ export const validateFieldN1 = ({ star, square, triangle, circle }) =>
   square === "green";
 
 // 2. Как минимум две фигуры зеленые.
-export const validateFieldN2 = allPass([
-  (shapes) => countColor("green")(shapes) >= 2,
-]);
+export const validateFieldN2 = (shapes) => countColor("green")(shapes) >= 2;
 
 // 3. Количество красных фигур равно кол-ву синих.
 export const validateFieldN3 = (shapes) =>
@@ -45,7 +43,7 @@ export const validateFieldN4 = ({ circle, star, square }) =>
 // 5. Три фигуры одного любого цвета кроме белого (четыре фигуры одного цвета – это тоже true).
 export const validateFieldN5 = (shapes) => {
   const colors = ["red", "blue", "green", "orange"];
-  return colors.some((color) => countColor(color)(shapes) >= 3);
+  return any((color) => countColor(color)(shapes) >= 3)(colors);
 };
 
 // 6. Ровно две зеленые фигуры (одна из зелёных – это треугольник), плюс одна красная.

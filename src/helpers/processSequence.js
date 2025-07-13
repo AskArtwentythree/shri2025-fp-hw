@@ -67,12 +67,18 @@ const processSequence = ({ value, writeLog, handleSuccess, handleError }) => {
       writeLog(remainder);
       return remainder;
     })
-    .then((id) => api.get(`https://animals.tech/${id}`))
-    .then(({ result: animal }) => {
+    .then((id) => {
+      // console.log("Making API call to animals.tech with id:", id);
+      return api.get(`https://animals.tech/${id}`)({});
+    })
+    .then((response) => {
+      // console.log("API response:", response);
+      const { result: animal } = response;
       handleSuccess(animal);
     })
     // Обработка ошибок
     .catch((err) => {
+      // console.log("Error caught:", err);
       const message =
         err.message === "ValidationError" ? "ValidationError" : err;
       handleError(message);
