@@ -77,7 +77,7 @@ export default class Api {
         }
 
         reject("Something went wrong");
-      }, 0);
+      }, 2000);
     });
   });
 }
